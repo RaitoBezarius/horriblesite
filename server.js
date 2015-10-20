@@ -11,13 +11,6 @@ var publicPath = path.resolve(__dirname, 'src', 'public');
 
 app.use(express.static(publicPath));
 
-// We proxyfie all API requests under the /api route
-app.all('/api/*', function(req, res) {
-    proxy.web(req, res, {
-        target: 'http://localhost:5000'
-    });
-});
-
 // We only want to run the workflow when not in production
 if (!isProduction) {
 
@@ -27,9 +20,9 @@ if (!isProduction) {
     var bundle = require('./server/bundle.js');
     bundle();
 
-    // Any requests to localhost:8080/build is proxied
+    // Any requests to localhost:8080/public is proxied
     // to webpack-dev-server
-    app.all('/build/*', function(req, res) {
+    app.all('/public/*', function(req, res) {
         proxy.web(req, res, {
             target: 'http://localhost:8090'
         });

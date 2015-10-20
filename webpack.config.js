@@ -9,8 +9,9 @@ var mainModulesPath = path.join(__dirname, 'src');
 var config = {
   devtool: 'eval',
 	entry: [
-    'webpack-dev-server/client?http://localhost:8090',
+    'webpack-dev-server/client?http://pythagore.xyz:8090',
     'webpack/hot/dev-server',
+    'bootstrap-webpack',
     mainPath
   ],
   output: {
@@ -19,7 +20,10 @@ var config = {
     filename: 'bundle.js'
   },
 	plugins: [
-    new Webpack.HotModuleReplacementPlugin()
+    new Webpack.HotModuleReplacementPlugin(),
+    new Webpack.ProvidePlugin({
+      jQuery: 'jquery'
+    })
 	],
 	resolve: {
 		root: mainModulesPath,

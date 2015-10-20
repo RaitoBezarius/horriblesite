@@ -23,8 +23,8 @@ module.exports = function() {
 
         // We serve the app from the build path.
         // It makes the proxying simpler:
-        // http://localhost:8090/build -> http://localhost:8085/build
-        publicPath: '/build/',
+        // http://localhost:8090/public -> http://localhost:8085/public
+        publicPath: '/public/',
 
         // Configure hot replacement
         hot: true,
@@ -38,7 +38,7 @@ module.exports = function() {
         }
     });
 
-    bundler.listen(8090, 'localhost', function() {
+    bundler.listen(8090, '0.0.0.0', function() {
         console.log('Bundling project, please wait...');
     });
 
